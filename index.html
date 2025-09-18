@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Círculos giratórios */
+        .circles {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            z-index: -1;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .circles-bottom {
+            position: fixed;
+            bottom: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            z-index: -1;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            animation: rotate linear infinite;
+        }
+        
+        .circles .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: 50px;
+            right: 50px;
+            animation-duration: 40s;
+        }
+        
+        .circles .circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            top: 100px;
+            right: 100px;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+        
+        .circles .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 150px;
+            right: 150px;
+            animation-duration: 20s;
+        }
+        
+        .circles .circle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 200px;
+            right: 200px;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+        
+        .circles .circle:nth-child(5) {
+            width: 50px;
+            height: 50px;
+            top: 225px;
+            right: 225px;
+            animation-duration: 10s;
+        }
+        
+        .circles-bottom .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            bottom: 50px;
+            left: 50px;
+            animation-duration: 45s;
+            animation-direction: reverse;
+        }
+        
+        .circles-bottom .circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            bottom: 100px;
+            left: 100px;
+            animation-duration: 35s;
+        }
+        
+        .circles-bottom .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            bottom: 150px;
+            left: 150px;
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+        
+        .circles-bottom .circle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 200px;
+            left: 200px;
+            animation-duration: 20s;
+        }
+        
+        .circles-bottom .circle:nth-child(5) {
+            width: 50px;
+            height: 50px;
+            bottom: 225px;
+            left: 225px;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Bolinhas neon flutuantes */
+        .floating-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.7;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .dot:nth-child(1) {
+            width: 15px;
+            height: 15px;
+            background: #ff00ff;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+        
+        .dot:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            background: #00ffff;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 20s;
+        }
+        
+        .dot:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            background: #ff9900;
+            top: 80%;
+            left: 15%;
+            animation-delay: 4s;
+            animation-duration: 30s;
+        }
+        
+        .dot:nth-child(4) {
+            width: 10px;
+            height: 10px;
+            background: #00ff00;
+            top: 30%;
+            left: 70%;
+            animation-delay: 1s;
+            animation-duration: 15s;
+        }
+        
+        .dot:nth-child(5) {
+            width: 18px;
+            height: 18px;
+            background: #ff0000;
+            top: 70%;
+            left: 40%;
+            animation-delay: 3s;
+            animation-duration: 22s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(15px);
+            }
+            50% {
+                transform: translateY(10px) translateX(-20px);
+            }
+            75% {
+                transform: translateY(-15px) translateX(-10px);
+            }
+        }
+        
+        /* Seções com parallax */
+        .parallax-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            z-index: 2;
+        }
+        
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #fff;
+        }
+        
+        /* Hero Section */
+        #hero {
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        #hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: none;
+        }
+        
+        #hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-weight: 300;
+        }
+        
+        .hero-highlight {
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-highlight:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            color: #000;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+            left: 0;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* Sobre */
+        #sobre {
+            background-color: #111;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .skills {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skill-bar {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .skill-progress {
+            height: 5px;
+            background: #333;
+            position: relative;
+        }
+        
+        .skill-progress span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: #fff;
+            width: 0;
+            transition: width 1s ease;
+        }
+        
+        /* Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .project-card {
+            background-color: #111;
+            padding: 20px;
+            border: 1px solid #333;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .project-card.expanded {
+            height: 400px;
+            z-index: 10;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-card p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .project-card .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            opacity: 0;
+        }
+        
+        .project-card.expanded .project-details {
+            max-height: 200px;
+            opacity: 1;
+        }
+        
+        .project-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .project-card.expanded .project-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-link:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .project-card:hover::before {
+            left: 100%;
+        }
+        
+        /* Contato */
+        #contato {
+            background-color: #111;
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        input, textarea {
+            background: #000;
+            border: 1px solid #333;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            border: 1px solid #fff;
+            outline: none;
+        }
+        
+        button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: #ccc;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Navegação */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #333;
+        }
+        
+        /* Overlay para quando o card estiver expandido */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 5;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
+            
+            #hero p {
+                font-size: 1.2rem;
+            }
+            
+            section h2 {
+                font-size: 2.5rem;
+            }
+            
+            .circles, .circles-bottom {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .circles .circle:nth-child(1) {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .circles .circle:nth-child(2) {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .circles .circle:nth-child(3) {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .circles .circle:nth-child(4) {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .circles .circle:nth-child(5) {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .circles-bottom .circle:nth-child(1) {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .circles-bottom .circle:nth-child(2) {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .circles-bottom .circle:nth-child(3) {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .circles-bottom .circle:nth-child(4) {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .circles-bottom .circle:nth-child(5) {
+                width: 50px;
+                height: 50px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .project-card.expanded {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Círculos giratórios -->
+    <div class="circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    
+    <div class="circles-bottom">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    
+    <!-- Bolinhas neon flutuantes -->
+    <div class="floating-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+    
+    <!-- Overlay para cards expandidos -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Navegação -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="parallax-section">
+        <div class="hero-content">
+            <h1>MEU PORTFÓLIO</h1>
+            <p>Design minimalista & desenvolvimento criativo em <span class="hero-highlight">preto e branco</span></p>
+            <a href="#projetos" class="cta-button">VER PROJETOS</a>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    
+    <!-- Sobre -->
+    <section id="sobre" class="parallax-section">
+        <div class="content">
+            <h2>SOBRE MIM</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sou um profissional dedicado à criação de experiências digitais excepcionais. Minha abordagem combina design minimalista com funcionalidade intuitiva, sempre priorizando a experiência do usuário.</p>
+                    <p>Com anos de experiência no mercado, desenvolvo soluções que unem forma e função, criando interfaces que não apenas impressionam visualmente, mas também oferecem desempenho e usabilidade.</p>
+                </div>
+                <div class="skills">
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>UI/UX Design</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <span data-width="90%"></span>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Desenvolvimento Frontend</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <span data-width="85%"></span>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Desenvolvimento Backend</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <span data-width="75%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projetos -->
+    <section id="projetos" class="parallax-section">
+        <div class="content">
+            <h2>MEUS PROJETOS</h2>
+            <div class="projects-grid">
+                <div class="project-card" data-project="1">
+                    <h3>Projeto Alpha</h3>
+                    <p>Design de interface moderno e responsivo para aplicativo mobile.</p>
+                    <div class="project-details">
+                        <p>Este projeto foi desenvolvido com React Native e conta com mais de 10 mil downloads na Play Store. Focado em experiência do usuário e performance.</p>
+                        <p><strong>Tecnologias:</strong> React Native, Firebase, Redux</p>
+                    </div>
+                    <a href="https://www.exemplo-alpha.com" class="project-link" target="_blank">Visitar Site</a>
+                </div>
+                <div class="project-card" data-project="2">
+                    <h3>Projeto Beta</h3>
+                    <p>Website corporativo com foco em experiência do usuário e performance.</p>
+                    <div class="project-details">
+                        <p>Site institucional desenvolvido para empresa de tecnologia, com aumento de 40% na taxa de conversão após o redesign.</p>
+                        <p><strong>Tecnologias:</strong> HTML5, CSS3, JavaScript, PHP</p>
+                    </div>
+                    <a href="https://www.exemplo-beta.com" class="project-link" target="_blank">Visitar Site</a>
+                </div>
+                <div class="project-card" data-project="3">
+                    <h3>Projeto Gamma</h3>
+                    <p>Sistema de dashboard com visualização de dados e analytics.</p>
+                    <div class="project-details">
+                        <p>Dashboard interativo para visualização de dados em tempo real, com mais de 15 tipos de gráficos e relatórios personalizáveis.</p>
+                        <p><strong>Tecnologias:</strong> Vue.js, D3.js, Node.js, MongoDB</p>
+                    </div>
+                    <a href="https://www.exemplo-gamma.com" class="project-link" target="_blank">Visitar Site</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contato -->
+    <section id="contato" class="parallax-section">
+        <div class="content">
+            <h2>ENTRE EM CONTATO</h2>
+            <form>
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Mensagem" rows="5" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Meu Portfólio. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        // Efeito parallax
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            const nav = document.querySelector('nav');
+            const overlay = document.getElementById('overlay');
+            const projectCards = document.querySelectorAll('.project-card');
+            let expandedCard = null;
+            
+            window.addEventListener('scroll', function() {
+                let scroll = window.pageYOffset;
+                
+                // Efeito de scroll na navegação
+                if (scroll > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                parallaxSections.forEach(section => {
+                    const speed = 0.5;
+                    const sectionOffset = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scroll >= sectionOffset - window.innerHeight && scroll <= sectionOffset + sectionHeight) {
+                        const yPos = -((scroll - sectionOffset) * speed);
+                        section.style.backgroundPosition = `center ${yPos}px`;
+                    }
+                });
+                
+                // Movimentar as bolinhas com o scroll
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach(dot => {
+                    const speed = dot.clientHeight / 10;
+                    dot.style.transform = `translateY(${scroll * speed / 20}px) rotate(${scroll * speed / 50}deg)`;
+                });
+                
+                // Animar barras de habilidades
+                const skillBars = document.querySelectorAll('.skill-progress span');
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width;
+                });
+            });
+            
+            // Ativar animação dos círculos
+            const circles = document.querySelectorAll('.circle');
+            circles.forEach(circle => {
+                circle.style.animationPlayState = 'running';
+            });
+            
+            // Expandir cards de projeto
+            projectCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Não fazer nada se clicar no link
+                    if (e.target.tagName === 'A') return;
+                    
+                    // Se já tem um card expandido, recolhe ele
+                    if (expandedCard && expandedCard !== this) {
+                        expandedCard.classList.remove('expanded');
+                        overlay.classList.remove('active');
+                    }
+                    
+                    // Expande ou recolhe o card clicado
+                    this.classList.toggle('expanded');
+                    
+                    // Ativa ou desativa o overlay
+                    if (this.classList.contains('expanded')) {
+                        expandedCard = this;
+                        overlay.classList.add('active');
+                    } else {
+                        expandedCard = null;
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Fechar card expandido ao clicar no overlay
+            overlay.addEventListener('click', function() {
+                if (expandedCard) {
+                    expandedCard.classList.remove('expanded');
+                    expandedCard = null;
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
