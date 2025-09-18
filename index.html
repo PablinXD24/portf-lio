@@ -25,6 +25,7 @@
             color: #fff;
             overflow-x: hidden;
             line-height: 1.6;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
         }
         
         /* Círculos giratórios */
@@ -35,7 +36,7 @@
             width: 500px;
             height: 500px;
             z-index: -1;
-            opacity: 0.7;
+            opacity: 0.5;
             pointer-events: none;
         }
         
@@ -46,14 +47,14 @@
             width: 500px;
             height: 500px;
             z-index: -1;
-            opacity: 0.7;
+            opacity: 0.5;
             pointer-events: none;
         }
         
         .circle {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             animation: rotate linear infinite;
         }
         
@@ -261,6 +262,7 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             position: relative;
+            font-weight: 600;
         }
         
         section h2::after {
@@ -293,6 +295,10 @@
             text-transform: uppercase;
             color: #fff;
             text-shadow: none;
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         #hero p {
@@ -300,6 +306,7 @@
             max-width: 700px;
             margin: 0 auto 2rem;
             font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .hero-highlight {
@@ -329,9 +336,10 @@
         .cta-button {
             display: inline-block;
             padding: 15px 40px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: #fff;
-            border: 1px solid #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             text-decoration: none;
             font-weight: 500;
             margin-top: 2rem;
@@ -339,26 +347,26 @@
             overflow: hidden;
             transition: all 0.3s ease;
             z-index: 1;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
         }
         
         .cta-button:hover {
-            color: #000;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.4);
         }
         
         .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: #fff;
-            transition: all 0.4s ease;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
             z-index: -1;
-        }
-        
-        .cta-button:hover::before {
-            left: 0;
+            border-radius: 50px;
         }
         
         .scroll-down {
@@ -385,7 +393,8 @@
         
         /* Sobre */
         #sobre {
-            background-color: #111;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         .about-content {
@@ -405,6 +414,8 @@
         .about-text p {
             margin-bottom: 20px;
             font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
         }
         
         .skills {
@@ -414,19 +425,22 @@
         }
         
         .skill-bar {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
         
         .skill-name {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .skill-progress {
-            height: 5px;
-            background: #333;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
             position: relative;
+            border-radius: 10px;
+            overflow: hidden;
         }
         
         .skill-progress span {
@@ -434,9 +448,10 @@
             left: 0;
             top: 0;
             height: 100%;
-            background: #fff;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
             width: 0;
             transition: width 1s ease;
+            border-radius: 10px;
         }
         
         /* Projetos */
@@ -451,33 +466,36 @@
         }
         
         .project-card {
-            background-color: #111;
-            padding: 20px;
-            border: 1px solid #333;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         
         .project-card.expanded {
-            position: relative;
-            width: 100%;
-            height: auto;
-            z-index: 20;
-            background: #000;
-            border: 1px solid #fff;
-            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.4);
         }
         
         .project-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
         }
         
         .project-card p {
             margin-bottom: 15px;
-            opacity: 0.8;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
         }
         
         .project-preview {
@@ -487,10 +505,12 @@
             transition: height 0.5s ease;
             border: none;
             margin-top: 15px;
+            border-radius: 15px;
         }
         
         .project-card.expanded .project-preview {
             height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .project-actions {
@@ -501,31 +521,41 @@
         }
         
         .project-link {
-            padding: 10px 20px;
-            background: #000;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: #fff;
-            border: 1px solid #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             text-decoration: none;
             transition: all 0.3s ease;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
         }
         
         .project-link:hover {
-            background: #fff;
-            color: #000;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.3);
         }
         
         .close-preview {
-            padding: 10px 20px;
-            background: #000;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: #fff;
-            border: 1px solid #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
         }
         
         .close-preview:hover {
-            background: #fff;
-            color: #000;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.3);
         }
         
         .project-card::before {
@@ -535,8 +565,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.7s ease;
         }
         
         .project-card:hover::before {
@@ -545,7 +575,8 @@
         
         /* Contato */
         #contato {
-            background-color: #111;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         form {
@@ -556,32 +587,47 @@
         }
         
         input, textarea {
-            background: #000;
-            border: 1px solid #333;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
             margin-bottom: 20px;
             color: #fff;
             font-size: 1rem;
-            transition: border 0.3s ease;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
         }
         
         input:focus, textarea:focus {
-            border: 1px solid #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             outline: none;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
         
         button {
-            background: #fff;
-            color: #000;
-            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 15px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+            font-size: 1rem;
         }
         
         button:hover {
-            background: #ccc;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.3);
         }
         
         .social-links {
@@ -594,11 +640,23 @@
         .social-links a {
             color: #fff;
             font-size: 1.5rem;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
         }
         
         .social-links a:hover {
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
         }
         
         /* Navegação */
@@ -608,13 +666,14 @@
             width: 100%;
             padding: 20px;
             z-index: 100;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            transition: background 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         nav.scrolled {
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.7);
             padding: 15px 20px;
         }
         
@@ -632,9 +691,10 @@
             color: #fff;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
-            padding: 5px 0;
+            padding: 8px 0;
+            font-size: 1rem;
         }
         
         nav ul li a::after {
@@ -643,9 +703,10 @@
             bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
+            height: 2px;
             background: #fff;
             transition: width 0.3s ease;
+            border-radius: 2px;
         }
         
         nav ul li a:hover::after {
@@ -656,7 +717,10 @@
         footer {
             text-align: center;
             padding: 30px;
-            border-top: 1px solid #333;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            color: rgba(255, 255, 255, 0.7);
         }
         
         /* Responsividade */
@@ -743,6 +807,11 @@
             .project-actions {
                 flex-direction: column;
             }
+            
+            .project-link, .close-preview {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -786,8 +855,8 @@
     <!-- Hero Section -->
     <section id="hero" class="parallax-section">
         <div class="hero-content">
-            <h1>MEU PORTFÓLIO</h1>
-            <p>Design minimalista & desenvolvimento criativo em <span class="hero-highlight">preto e branco</span></p>
+            <h1>Pablo Soares</h1>
+            <p>Pesquisa & desenvolvimento <span class="hero-highlight">criativo</span></p>
             <a href="#projetos" class="cta-button">VER PROJETOS</a>
         </div>
         <div class="scroll-down">
@@ -843,13 +912,13 @@
             <h2>MEUS PROJETOS</h2>
             <div class="projects-container">
                 <div class="project-card" data-project="1">
-                    <h3>FECEG</h3>
-                    <p>Feira de Ciências e engenharia de Guarulhos.</p>
+                    <h3>NEURON</h3>
+                    <p>App desenvolvido para competir na FECEG.</p>
                     <div class="project-preview">
                         <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;" id="preview-1"></iframe>
                     </div>
                     <div class="project-actions">
-                        <a href="https://www.exemplo-alpha.com" class="project-link" target="_blank">Abrir em Nova Aba</a>
+                        <a href="https://pablinxd24.github.io/NEURON3/" class="project-link" target="_blank">Abrir em Nova Aba</a>
                         <button class="close-preview">Fechar Visualização</button>
                     </div>
                 </div>
