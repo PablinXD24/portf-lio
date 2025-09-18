@@ -399,6 +399,7 @@
         .about-text {
             flex: 1;
             min-width: 300px;
+            max-width: 600px;
         }
         
         .about-text p {
@@ -409,6 +410,7 @@
         .skills {
             flex: 1;
             min-width: 300px;
+            max-width: 600px;
         }
         
         .skill-bar {
@@ -438,11 +440,14 @@
         }
         
         /* Projetos */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .projects-container {
+            display: flex;
+            flex-direction: column;
             gap: 30px;
             margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .project-card {
@@ -453,17 +458,16 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
         
         .project-card.expanded {
-            height: 400px;
-            z-index: 10;
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            position: relative;
+            width: 100%;
+            height: auto;
+            z-index: 20;
+            background: #000;
+            border: 1px solid #fff;
+            margin: 20px 0;
         }
         
         .project-card h3 {
@@ -476,38 +480,50 @@
             opacity: 0.8;
         }
         
-        .project-card .project-details {
-            max-height: 0;
+        .project-preview {
+            width: 100%;
+            height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease;
-            opacity: 0;
+            transition: height 0.5s ease;
+            border: none;
+            margin-top: 15px;
         }
         
-        .project-card.expanded .project-details {
-            max-height: 200px;
-            opacity: 1;
+        .project-card.expanded .project-preview {
+            height: 500px;
+        }
+        
+        .project-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+            gap: 10px;
         }
         
         .project-link {
-            display: block;
-            text-align: center;
-            padding: 10px;
+            padding: 10px 20px;
             background: #000;
             color: #fff;
             border: 1px solid #fff;
             text-decoration: none;
-            margin-top: 15px;
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .project-card.expanded .project-link {
-            opacity: 1;
-            transform: translateY(0);
         }
         
         .project-link:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .close-preview {
+            padding: 10px 20px;
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-preview:hover {
             background: #fff;
             color: #000;
         }
@@ -643,25 +659,6 @@
             border-top: 1px solid #333;
         }
         
-        /* Overlay para quando o card estiver expandido */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 5;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
         /* Responsividade */
         @media (max-width: 768px) {
             #hero h1 {
@@ -739,8 +736,12 @@
                 margin: 5px 10px;
             }
             
-            .project-card.expanded {
-                height: 450px;
+            .project-card.expanded .project-preview {
+                height: 300px;
+            }
+            
+            .project-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -771,9 +772,6 @@
         <div class="dot"></div>
         <div class="dot"></div>
     </div>
-    
-    <!-- Overlay para cards expandidos -->
-    <div class="overlay" id="overlay"></div>
     
     <!-- Navegação -->
     <nav>
@@ -843,33 +841,39 @@
     <section id="projetos" class="parallax-section">
         <div class="content">
             <h2>MEUS PROJETOS</h2>
-            <div class="projects-grid">
+            <div class="projects-container">
                 <div class="project-card" data-project="1">
-                    <h3>Projeto Alpha</h3>
-                    <p>Design de interface moderno e responsivo para aplicativo mobile.</p>
-                    <div class="project-details">
-                        <p>Este projeto foi desenvolvido com React Native e conta com mais de 10 mil downloads na Play Store. Focado em experiência do usuário e performance.</p>
-                        <p><strong>Tecnologias:</strong> React Native, Firebase, Redux</p>
+                    <h3>FECEG</h3>
+                    <p>Feira de Ciências e engenharia de Guarulhos.</p>
+                    <div class="project-preview">
+                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;" id="preview-1"></iframe>
                     </div>
-                    <a href="https://www.exemplo-alpha.com" class="project-link" target="_blank">Visitar Site</a>
+                    <div class="project-actions">
+                        <a href="https://www.exemplo-alpha.com" class="project-link" target="_blank">Abrir em Nova Aba</a>
+                        <button class="close-preview">Fechar Visualização</button>
+                    </div>
                 </div>
                 <div class="project-card" data-project="2">
                     <h3>Projeto Beta</h3>
                     <p>Website corporativo com foco em experiência do usuário e performance.</p>
-                    <div class="project-details">
-                        <p>Site institucional desenvolvido para empresa de tecnologia, com aumento de 40% na taxa de conversão após o redesign.</p>
-                        <p><strong>Tecnologias:</strong> HTML5, CSS3, JavaScript, PHP</p>
+                    <div class="project-preview">
+                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;" id="preview-2"></iframe>
                     </div>
-                    <a href="https://www.exemplo-beta.com" class="project-link" target="_blank">Visitar Site</a>
+                    <div class="project-actions">
+                        <a href="https://www.exemplo-beta.com" class="project-link" target="_blank">Abrir em Nova Aba</a>
+                        <button class="close-preview">Fechar Visualização</button>
+                    </div>
                 </div>
                 <div class="project-card" data-project="3">
                     <h3>Projeto Gamma</h3>
                     <p>Sistema de dashboard com visualização de dados e analytics.</p>
-                    <div class="project-details">
-                        <p>Dashboard interativo para visualização de dados em tempo real, com mais de 15 tipos de gráficos e relatórios personalizáveis.</p>
-                        <p><strong>Tecnologias:</strong> Vue.js, D3.js, Node.js, MongoDB</p>
+                    <div class="project-preview">
+                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;" id="preview-3"></iframe>
                     </div>
-                    <a href="https://www.exemplo-gamma.com" class="project-link" target="_blank">Visitar Site</a>
+                    <div class="project-actions">
+                        <a href="https://www.exemplo-gamma.com" class="project-link" target="_blank">Abrir em Nova Aba</a>
+                        <button class="close-preview">Fechar Visualização</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -904,9 +908,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             const parallaxSections = document.querySelectorAll('.parallax-section');
             const nav = document.querySelector('nav');
-            const overlay = document.getElementById('overlay');
             const projectCards = document.querySelectorAll('.project-card');
+            const closeButtons = document.querySelectorAll('.close-preview');
             let expandedCard = null;
+            
+            // URLs dos projetos (substitua pelas URLs reais)
+            const projectUrls = {
+                1: 'https://pablinxd24.github.io/NEURON3/',
+                2: 'https://www.exemplo-beta.com',
+                3: 'https://www.exemplo-gamma.com'
+            };
             
             window.addEventListener('scroll', function() {
                 let scroll = window.pageYOffset;
@@ -953,36 +964,45 @@
             // Expandir cards de projeto
             projectCards.forEach(card => {
                 card.addEventListener('click', function(e) {
-                    // Não fazer nada se clicar no link
-                    if (e.target.tagName === 'A') return;
+                    // Não fazer nada se clicar nos botões de ação
+                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('.project-actions')) return;
                     
                     // Se já tem um card expandido, recolhe ele
                     if (expandedCard && expandedCard !== this) {
                         expandedCard.classList.remove('expanded');
-                        overlay.classList.remove('active');
+                        const iframe = expandedCard.querySelector('iframe');
+                        iframe.src = 'about:blank';
                     }
                     
                     // Expande ou recolhe o card clicado
                     this.classList.toggle('expanded');
                     
-                    // Ativa ou desativa o overlay
+                    // Carrega o site no iframe se estiver expandindo
                     if (this.classList.contains('expanded')) {
                         expandedCard = this;
-                        overlay.classList.add('active');
+                        const projectId = this.getAttribute('data-project');
+                        const iframe = this.querySelector('iframe');
+                        iframe.src = projectUrls[projectId];
                     } else {
                         expandedCard = null;
-                        overlay.classList.remove('active');
+                        const iframe = this.querySelector('iframe');
+                        iframe.src = 'about:blank';
                     }
                 });
             });
             
-            // Fechar card expandido ao clicar no overlay
-            overlay.addEventListener('click', function() {
-                if (expandedCard) {
-                    expandedCard.classList.remove('expanded');
-                    expandedCard = null;
-                    this.classList.remove('active');
-                }
+            // Fechar card expandido
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const card = this.closest('.project-card');
+                    if (card && card.classList.contains('expanded')) {
+                        card.classList.remove('expanded');
+                        const iframe = card.querySelector('iframe');
+                        iframe.src = 'about:blank';
+                        expandedCard = null;
+                    }
+                });
             });
         });
     </script>
