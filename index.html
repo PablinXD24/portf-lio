@@ -478,68 +478,94 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         
-        /* Efeito de luz para cada card com cores diferentes */
-        .project-card[data-project="1"]::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255, 0, 255, 0.4) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .project-card[data-project="2"]::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.4) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .project-card[data-project="3"]::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255, 153, 0, 0.4) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .project-card:hover::before {
-            opacity: 0.6;
-        }
-        
-        /* Efeito de reflexo gradual */
-        .project-card::after {
+        /* Efeito de luz natural nas bordas */
+        .project-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.7s ease;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.1) 30%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0.1) 70%, 
+                transparent 100%);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
             z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Cores específicas para cada card */
+        .project-card[data-project="1"]::before {
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 0, 255, 0.3) 30%, 
+                rgba(255, 0, 255, 0.6) 50%, 
+                rgba(255, 0, 255, 0.3) 70%, 
+                transparent 100%);
+        }
+        
+        .project-card[data-project="2"]::before {
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(0, 255, 255, 0.3) 30%, 
+                rgba(0, 255, 255, 0.6) 50%, 
+                rgba(0, 255, 255, 0.3) 70%, 
+                transparent 100%);
+        }
+        
+        .project-card[data-project="3"]::before {
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 153, 0, 0.3) 30%, 
+                rgba(255, 153, 0, 0.6) 50%, 
+                rgba(255, 153, 0, 0.3) 70%, 
+                transparent 100%);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Efeito de luz interna suave */
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .project-card[data-project="1"]::after {
+            background: radial-gradient(circle at center, rgba(255, 0, 255, 0.1) 0%, transparent 60%);
+        }
+        
+        .project-card[data-project="2"]::after {
+            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 60%);
+        }
+        
+        .project-card[data-project="3"]::after {
+            background: radial-gradient(circle at center, rgba(255, 153, 0, 0.1) 0%, transparent 60%);
         }
         
         .project-card:hover::after {
-            left: 100%;
+            opacity: 0.4;
         }
         
         .project-card.expanded {
@@ -993,7 +1019,7 @@
                 </div>
                 <div class="project-card" data-project="3">
                     <h3>Projeto Gamma</h3>
-                    <p>Sistema de dashboard com visualização de dados и analytics.</p>
+                    <p>Sistema de dashboard com visualização de dados e analytics.</p>
                     <div class="project-preview">
                         <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;" id="preview-3"></iframe>
                     </div>
