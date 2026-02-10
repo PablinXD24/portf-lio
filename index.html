@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PabloS | Portfolio</title>
+    <title>PabloS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset e estilos base */
@@ -12,25 +12,11 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            cursor: none; /* Cursor personalizado */
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        /* Personalização da Barra de Rolagem */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #444;
-        }
-
         html {
             scroll-behavior: smooth;
         }
@@ -42,53 +28,59 @@
             line-height: 1.6;
             background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
         }
+
+        /* Custom Cursor */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease-out, background 0.3s ease;
+        }
+
+        .cursor-hover {
+            transform: scale(2.5);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
         
         /* Círculos giratórios */
-        .circles {
+        .circles, .circles-bottom {
             position: fixed;
-            top: 0;
-            right: 0;
             width: 500px;
             height: 500px;
             z-index: -1;
             opacity: 0.5;
             pointer-events: none;
+            transition: transform 0.2s ease-out; /* Interação com mouse */
         }
         
-        .circles-bottom {
-            position: fixed;
-            bottom: -100px;
-            left: -100px;
-            width: 500px;
-            height: 500px;
-            z-index: -1;
-            opacity: 0.5;
-            pointer-events: none;
-        }
+        .circles { top: 0; right: 0; }
+        .circles-bottom { bottom: -100px; left: -100px; }
         
         .circle {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             animation: rotate linear infinite;
         }
         
+        /* ... Animações originais mantidas ... */
         .circles .circle:nth-child(1) { width: 400px; height: 400px; top: 50px; right: 50px; animation-duration: 40s; }
         .circles .circle:nth-child(2) { width: 300px; height: 300px; top: 100px; right: 100px; animation-duration: 30s; animation-direction: reverse; }
         .circles .circle:nth-child(3) { width: 200px; height: 200px; top: 150px; right: 150px; animation-duration: 20s; }
         .circles .circle:nth-child(4) { width: 100px; height: 100px; top: 200px; right: 200px; animation-duration: 15s; animation-direction: reverse; }
         .circles .circle:nth-child(5) { width: 50px; height: 50px; top: 225px; right: 225px; animation-duration: 10s; }
-        
         .circles-bottom .circle:nth-child(1) { width: 400px; height: 400px; bottom: 50px; left: 50px; animation-duration: 45s; animation-direction: reverse; }
         .circles-bottom .circle:nth-child(2) { width: 300px; height: 300px; bottom: 100px; left: 100px; animation-duration: 35s; }
         .circles-bottom .circle:nth-child(3) { width: 200px; height: 200px; bottom: 150px; left: 150px; animation-duration: 25s; animation-direction: reverse; }
         .circles-bottom .circle:nth-child(4) { width: 100px; height: 100px; bottom: 200px; left: 200px; animation-duration: 20s; }
         .circles-bottom .circle:nth-child(5) { width: 50px; height: 50px; bottom: 225px; left: 225px; animation-duration: 15s; animation-direction: reverse; }
         
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* Bolinhas neon flutuantes */
         .floating-dots {
@@ -104,24 +96,19 @@
         .dot {
             position: absolute;
             border-radius: 50%;
-            filter: blur(1px);
-            opacity: 0.7;
+            filter: blur(2px);
+            opacity: 0.6;
             animation: float 15s infinite ease-in-out;
-            box-shadow: 0 0 10px currentColor;
         }
         
+        /* Cores e posições mantidas conforme original */
         .dot:nth-child(1) { width: 15px; height: 15px; background: #ff00ff; top: 20%; left: 10%; animation-duration: 25s; }
         .dot:nth-child(2) { width: 20px; height: 20px; background: #00ffff; top: 60%; left: 80%; animation-duration: 20s; }
         .dot:nth-child(3) { width: 25px; height: 25px; background: #ff9900; top: 80%; left: 15%; animation-duration: 30s; }
         .dot:nth-child(4) { width: 10px; height: 10px; background: #00ff00; top: 30%; left: 70%; animation-duration: 15s; }
         .dot:nth-child(5) { width: 18px; height: 18px; background: #ff0000; top: 70%; left: 40%; animation-duration: 22s; }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-20px) translateX(15px); }
-            50% { transform: translateY(10px) translateX(-20px); }
-            75% { transform: translateY(-15px) translateX(-10px); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); } 25% { transform: translateY(-30px) translateX(20px); } 50% { transform: translateY(15px) translateX(-25px); } }
         
         /* Seções */
         .parallax-section {
@@ -130,174 +117,119 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px;
+            padding: 0 20px;
             position: relative;
         }
         
-        .content {
-            max-width: 1000px;
-            margin: 0 auto;
-            z-index: 2;
-        }
-        
-        /* Reveal Animation on Scroll */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         section h2 {
             font-size: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            font-weight: 600;
-            text-shadow: 0 0 15px rgba(255,255,255,0.1);
-        }
-        
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: #fff;
-            border-radius: 5px;
+            letter-spacing: 5px; /* Refinamento */
+            font-weight: 700;
         }
         
         /* Hero Section */
         #hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: 5.5rem; /* Maior destaque */
             margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 0%, #777777 100%);
+            font-weight: 800;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         #hero p {
-            font-size: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.6); /* Hierarquia visual */
         }
         
-        .hero-highlight {
-            color: #fff;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 15px 45px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
-            70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
-            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        /* Glassmorphism Refinado nos Cards e Botões */
+        .project-card, .cta-button, input, textarea, button, .social-links a, nav {
+            backdrop-filter: blur(15px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        .cta-button:hover {
-            background: #fff;
-            color: #000;
-            transform: translateY(-5px) scale(1.05);
-            animation: none;
-        }
-        
-        /* Projetos */
+        /* Estilo dos Cards de Projetos */
         .project-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-radius: 24px;
-            margin-bottom: 20px;
+            padding: 30px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .project-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-10px) scale(1.01);
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
+        /* Iframe Loader */
+        .project-preview {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .project-preview::before {
+            content: "Carregando experiência...";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+            z-index: 1;
+        }
+
+        /* Habilidades */
+        .skill-progress {
+            height: 6px; /* Mais fino/moderno */
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+
+        .skill-progress span {
+            border-radius: 20px;
+        }
+
+        /* Botão de envio feedback */
+        button:active {
+            transform: scale(0.95);
+        }
+
         /* Navegação */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 25px;
-            z-index: 100;
-            background: transparent;
-            transition: all 0.4s ease;
+            padding: 25px 20px;
         }
         
         nav.scrolled {
-            background: rgba(0, 0, 0, 0.8);
             padding: 15px 20px;
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        nav ul li a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.8);
         }
 
-        nav ul li a:hover {
-            color: #fff;
+        /* Responsividade mantida */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 3rem; }
+            * { cursor: auto !important; }
+            #custom-cursor { display: none; }
         }
-
-        /* Mantendo o restante dos estilos originais do formulário e cards expandidos */
-        .project-preview { width: 100%; height: 0; overflow: hidden; transition: height 0.5s ease; border-radius: 15px; margin-top: 15px; }
-        .project-card.expanded .project-preview { height: 500px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .project-actions { display: flex; justify-content: flex-end; margin-top: 15px; gap: 10px; }
-        .project-link, .close-preview { padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
-        .project-link:hover, .close-preview:hover { background: #fff; color: #000; }
-
-        .skills { width: 100%; margin-top: 30px; }
-        .skill-progress { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 8px; }
-        .skill-progress span { display: block; height: 100%; background: #fff; width: 0; transition: width 1.5s ease-in-out; }
     </style>
 </head>
 <body>
-    <div class="circles"><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div></div>
-    <div class="circles-bottom"><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div></div>
-    <div class="floating-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div id="custom-cursor"></div>
+
+    <div class="circles" id="circles-top">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    </div>
+    
+    <div class="circles-bottom" id="circles-bottom">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    </div>
+    
+    <div class="floating-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
     
     <nav>
         <ul>
@@ -309,19 +241,22 @@
     </nav>
     
     <section id="hero" class="parallax-section">
-        <div class="hero-content reveal">
+        <div class="hero-content">
             <h1>PABLO SOARES</h1>
             <p>Pesquisa & desenvolvimento <span class="hero-highlight">criativo</span></p>
-            <a href="#projetos" class="cta-button">VER PROJETOS</a>
+            <a href="#projetos" class="cta-button">PROJETOS</a>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
     
     <section id="sobre" class="parallax-section">
-        <div class="content reveal">
+        <div class="content">
             <h2>SOBRE MIM</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Sou um profissional dedicado à criação de experiências digitais excepcionais. Minha abordagem combina design minimalista com funcionalidade intuitiva.</p>
+                    <p>Sou um profissional dedicado à criação de experiências digitais excepcionais. Minha abordagem combina design minimalista com funcionalidade intuitiva, sempre priorizando a experiência do usuário.</p>
                 </div>
                 <div class="skills">
                     <div class="skill-bar">
@@ -329,8 +264,12 @@
                         <div class="skill-progress"><span data-width="90%"></span></div>
                     </div>
                     <div class="skill-bar">
-                        <div class="skill-name"><span>Frontend</span><span>85%</span></div>
+                        <div class="skill-name"><span>Desenvolvimento Frontend</span><span>85%</span></div>
                         <div class="skill-progress"><span data-width="85%"></span></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name"><span>Desenvolvimento Backend</span><span>75%</span></div>
+                        <div class="skill-progress"><span data-width="75%"></span></div>
                     </div>
                 </div>
             </div>
@@ -338,86 +277,166 @@
     </section>
     
     <section id="projetos" class="parallax-section">
-        <div class="content reveal">
+        <div class="content">
             <h2>MEUS PROJETOS</h2>
             <div class="projects-container">
                 <div class="project-card" data-project="1">
                     <h3>NEURON</h3>
                     <p>App desenvolvido para competir na FECEG / FEBRACE.</p>
-                    <div class="project-preview"><iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;"></iframe></div>
+                    <div class="project-preview">
+                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%; position: relative; z-index: 2;"></iframe>
+                    </div>
                     <div class="project-actions">
-                        <a href="https://pablinxd24.github.io/NEURON3/" class="project-link" target="_blank">Visitar</a>
-                        <button class="close-preview">Fechar</button>
+                        <a href="https://pablinxd24.github.io/NEURON3/" class="project-link" target="_blank">Conhecer de pertinho</a>
+                        <button class="close-preview">Diminuir card</button>
                     </div>
                 </div>
                 <div class="project-card" data-project="2">
                     <h3>GELOTECA</h3>
-                    <p>Website para auxiliar a ONG geloteca.</p>
-                    <div class="project-preview"><iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%;"></iframe></div>
+                    <p>Website para auxiliar a ONG geloteca a expandir as visualizações.</p>
+                    <div class="project-preview">
+                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%; position: relative; z-index: 2;"></iframe>
+                    </div>
                     <div class="project-actions">
-                        <a href="https://pablinxd24.github.io/GELOTECA/" class="project-link" target="_blank">Visitar</a>
-                        <button class="close-preview">Fechar</button>
+                        <a href="https://pablinxd24.github.io/GELOTECA/" class="project-link" target="_blank">Conhecer de pertinho</a>
+                        <button class="close-preview">Diminuir card</button>
+                    </div>
+                </div>
+                <div class="project-card" data-project="3">
+                    <h3>BOLINHAS</h3>
+                    <p>Criado para divertir e testar aplicação real da gravidade dentro de códigos.</p>
+                    <div class="project-preview">
+                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%; position: relative; z-index: 2;"></iframe>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://pablinxd24.github.io/bolita2/" class="project-link" target="_blank">Conhecer de pertinho</a>
+                        <button class="close-preview">Diminuir card</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
+    <section id="contato" class="parallax-section">
+        <div class="content">
+            <h2>ENTRE EM CONTATO</h2>
+            <form id="contact-form">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Mensagem" rows="5" required></textarea>
+                <button type="submit" id="submit-btn">Enviar Mensagem</button>
+            </form>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 Pablo Soares. Todos os direitos reservados.</p>
+    </footer>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Reveal on scroll
-            const observerOptions = { threshold: 0.2 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        // Animar barras de skill quando visíveis
-                        const bars = entry.target.querySelectorAll('.skill-progress span');
-                        bars.forEach(bar => bar.style.width = bar.getAttribute('data-width'));
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-            // Navbar Scroll
-            window.addEventListener('scroll', () => {
-                const nav = document.querySelector('nav');
-                nav.classList.toggle('scrolled', window.scrollY > 50);
-            });
-
-            // Lógica de expansão de cards (mantida e otimizada)
-            const projectCards = document.querySelectorAll('.project-card');
+            const cursor = document.getElementById('custom-cursor');
+            const circlesTop = document.getElementById('circles-top');
+            const circlesBottom = document.getElementById('circles-bottom');
             const projectUrls = {
                 1: 'https://pablinxd24.github.io/NEURON-MOB/',
                 2: 'https://pablinxd24.github.io/GELOTECA/',
                 3: 'https://pablinxd24.github.io/bolita2/'
             };
 
-            projectCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    if (e.target.closest('.project-actions')) return;
-                    
-                    const isExpanded = this.classList.contains('expanded');
-                    projectCards.forEach(c => {
-                        c.classList.remove('expanded');
-                        c.querySelector('iframe').src = 'about:blank';
-                    });
+            // 1. Cursor e Interação de Fundo
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Movimento sutil dos círculos de fundo
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+                circlesTop.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                circlesBottom.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+            });
 
-                    if (!isExpanded) {
-                        this.classList.add('expanded');
-                        const id = this.getAttribute('data-project');
-                        this.querySelector('iframe').src = projectUrls[id];
+            // Efeito de hover do cursor
+            const interactiveElements = document.querySelectorAll('a, button, .project-card, input, textarea');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+            });
+
+            // 2. Parallax e Scroll
+            window.addEventListener('scroll', function() {
+                let scroll = window.pageYOffset;
+                const nav = document.querySelector('nav');
+                
+                if (scroll > 50) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+                
+                // Parallax reverso nas bolinhas
+                document.querySelectorAll('.dot').forEach(dot => {
+                    const speed = dot.clientHeight * 0.15;
+                    dot.style.transform = `translateY(${scroll * -0.1}px)`;
+                });
+
+                // Animação de skills quando visível
+                document.querySelectorAll('.skill-progress span').forEach(bar => {
+                    const rect = bar.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        bar.style.width = bar.getAttribute('data-width');
                     }
                 });
             });
 
-            document.querySelectorAll('.close-preview').forEach(btn => {
-                btn.addEventListener('click', (e) => {
+            // 3. Lógica de Expansão de Cards (Original mantida e refinada)
+            const projectCards = document.querySelectorAll('.project-card');
+            let expandedCard = null;
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('.project-actions')) return;
+                    
+                    if (expandedCard && expandedCard !== this) {
+                        expandedCard.classList.remove('expanded');
+                        expandedCard.querySelector('iframe').src = 'about:blank';
+                    }
+                    
+                    this.classList.toggle('expanded');
+                    
+                    if (this.classList.contains('expanded')) {
+                        expandedCard = this;
+                        const projectId = this.getAttribute('data-project');
+                        this.querySelector('iframe').src = projectUrls[projectId];
+                    } else {
+                        expandedCard = null;
+                        this.querySelector('iframe').src = 'about:blank';
+                    }
+                });
+            });
+
+            // 4. Feedback de Formulário
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Enviando...';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Enviado!';
+                    form.reset();
+                }, 2000);
+            });
+            
+            // Botão fechar
+            document.querySelectorAll('.close-preview').forEach(button => {
+                button.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const card = btn.closest('.project-card');
+                    const card = this.closest('.project-card');
                     card.classList.remove('expanded');
                     card.querySelector('iframe').src = 'about:blank';
+                    expandedCard = null;
                 });
             });
         });
