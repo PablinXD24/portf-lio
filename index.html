@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PabloS</title>
+    <title>PabloS | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset e estilos base */
@@ -12,7 +12,8 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            cursor: none; /* Cursor personalizado */
+            /* Cursor personalizado base */
+            cursor: none;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -38,11 +39,12 @@
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.15s ease-out, background 0.3s ease;
+            transition: transform 0.1s ease, background 0.3s ease, border 0.3s ease;
+            transform: translate(-50%, -50%);
         }
 
         .cursor-hover {
-            transform: scale(2.5);
+            transform: translate(-50%, -50%) scale(2.5);
             background: rgba(255, 255, 255, 0.1);
             border-color: #fff;
         }
@@ -55,7 +57,7 @@
             z-index: -1;
             opacity: 0.5;
             pointer-events: none;
-            transition: transform 0.2s ease-out; /* Interação com mouse */
+            transition: transform 0.2s ease-out;
         }
         
         .circles { top: 0; right: 0; }
@@ -68,29 +70,23 @@
             animation: rotate linear infinite;
         }
         
-        /* ... Animações originais mantidas ... */
+        /* Mantendo animações originais */
         .circles .circle:nth-child(1) { width: 400px; height: 400px; top: 50px; right: 50px; animation-duration: 40s; }
         .circles .circle:nth-child(2) { width: 300px; height: 300px; top: 100px; right: 100px; animation-duration: 30s; animation-direction: reverse; }
         .circles .circle:nth-child(3) { width: 200px; height: 200px; top: 150px; right: 150px; animation-duration: 20s; }
         .circles .circle:nth-child(4) { width: 100px; height: 100px; top: 200px; right: 200px; animation-duration: 15s; animation-direction: reverse; }
         .circles .circle:nth-child(5) { width: 50px; height: 50px; top: 225px; right: 225px; animation-duration: 10s; }
+        
         .circles-bottom .circle:nth-child(1) { width: 400px; height: 400px; bottom: 50px; left: 50px; animation-duration: 45s; animation-direction: reverse; }
         .circles-bottom .circle:nth-child(2) { width: 300px; height: 300px; bottom: 100px; left: 100px; animation-duration: 35s; }
-        .circles-bottom .circle:nth-child(3) { width: 200px; height: 200px; bottom: 150px; left: 150px; animation-duration: 25s; animation-direction: reverse; }
-        .circles-bottom .circle:nth-child(4) { width: 100px; height: 100px; bottom: 200px; left: 200px; animation-duration: 20s; }
-        .circles-bottom .circle:nth-child(5) { width: 50px; height: 50px; bottom: 225px; left: 225px; animation-duration: 15s; animation-direction: reverse; }
         
         @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* Bolinhas neon flutuantes */
         .floating-dots {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
         }
         
         .dot {
@@ -99,16 +95,21 @@
             filter: blur(2px);
             opacity: 0.6;
             animation: float 15s infinite ease-in-out;
+            transition: transform 0.1s linear;
         }
         
-        /* Cores e posições mantidas conforme original */
         .dot:nth-child(1) { width: 15px; height: 15px; background: #ff00ff; top: 20%; left: 10%; animation-duration: 25s; }
         .dot:nth-child(2) { width: 20px; height: 20px; background: #00ffff; top: 60%; left: 80%; animation-duration: 20s; }
         .dot:nth-child(3) { width: 25px; height: 25px; background: #ff9900; top: 80%; left: 15%; animation-duration: 30s; }
         .dot:nth-child(4) { width: 10px; height: 10px; background: #00ff00; top: 30%; left: 70%; animation-duration: 15s; }
         .dot:nth-child(5) { width: 18px; height: 18px; background: #ff0000; top: 70%; left: 40%; animation-duration: 22s; }
         
-        @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); } 25% { transform: translateY(-30px) translateX(20px); } 50% { transform: translateY(15px) translateX(-25px); } }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(15px); }
+            50% { transform: translateY(10px) translateX(-20px); }
+            75% { transform: translateY(-15px) translateX(-10px); }
+        }
         
         /* Seções */
         .parallax-section {
@@ -119,100 +120,181 @@
             align-items: center;
             padding: 0 20px;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            z-index: 2;
         }
         
         section h2 {
             font-size: 3rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 5px; /* Refinamento */
-            font-weight: 700;
+            letter-spacing: 5px; /* Aumentado */
+            position: relative;
+            font-weight: 700; /* Aumentado */
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #fff;
         }
         
         /* Hero Section */
         #hero h1 {
-            font-size: 5.5rem; /* Maior destaque */
+            font-size: 5.5rem;
             margin-bottom: 1rem;
             font-weight: 800;
             letter-spacing: 8px;
-            background: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%);
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         #hero p {
             font-size: 1.4rem;
+            font-weight: 300;
             color: rgba(255, 255, 255, 0.6); /* Hierarquia visual */
         }
         
-        /* Glassmorphism Refinado nos Cards e Botões */
-        .project-card, .cta-button, input, textarea, button, .social-links a, nav {
-            backdrop-filter: blur(15px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+        .hero-highlight {
+            color: #fff;
+            font-weight: 500;
         }
-
-        /* Estilo dos Cards de Projetos */
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); /* Glassmorphism reforçado */
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        /* Projetos - Cards Refinados */
         .project-card {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
+            backdrop-filter: blur(12px);
             padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.01);
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        /* Iframe Loader */
-        .project-preview {
-            background: #0a0a0a;
+            border-radius: 24px;
             position: relative;
         }
 
-        .project-preview::before {
-            content: "Carregando experiência...";
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Indicador de Interatividade no Card */
+        .project-card::after {
+            content: '\f067';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 20px;
+            right: 20px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .project-card:hover::after { opacity: 0.5; }
+        .project-card.expanded::after { content: '\f068'; }
+
+        .project-preview {
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+            background: #0a0a0a; /* Fundo para carregar */
+            position: relative;
+        }
+
+        /* Loader simples para Iframe */
+        .project-card.expanded .project-preview::before {
+            content: 'Carregando experiência...';
+            position: absolute;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255,255,255,0.3);
             z-index: 1;
+        }
+
+        .project-card.expanded .project-preview {
+            height: 500px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         /* Habilidades */
         .skill-progress {
-            height: 6px; /* Mais fino/moderno */
+            height: 10px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-        }
-
-        .skill-progress span {
-            border-radius: 20px;
-        }
-
-        /* Botão de envio feedback */
-        button:active {
-            transform: scale(0.95);
-        }
-
-        /* Navegação */
-        nav {
-            padding: 25px 20px;
+            border-radius: 20px; /* Bordas mais suaves */
         }
         
-        nav.scrolled {
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.8);
+        .skill-progress span {
+            background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.2) 100%);
+            border-radius: 20px;
         }
 
-        /* Responsividade mantida */
+        /* Inputs Glassmorphism */
+        input, textarea {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Botão de Envio com Feedback */
+        #btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        /* Navegação */
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsividade */
         @media (max-width: 768px) {
-            #hero h1 { font-size: 3rem; }
-            * { cursor: auto !important; }
+            #hero h1 { font-size: 3.2rem; }
             #custom-cursor { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
@@ -244,7 +326,7 @@
         <div class="hero-content">
             <h1>PABLO SOARES</h1>
             <p>Pesquisa & desenvolvimento <span class="hero-highlight">criativo</span></p>
-            <a href="#projetos" class="cta-button">PROJETOS</a>
+            <a href="#projetos" class="cta-button">VER PROJETOS</a>
         </div>
         <div class="scroll-down">
             <i class="fas fa-chevron-down"></i>
@@ -256,7 +338,8 @@
             <h2>SOBRE MIM</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Sou um profissional dedicado à criação de experiências digitais excepcionais. Minha abordagem combina design minimalista com funcionalidade intuitiva, sempre priorizando a experiência do usuário.</p>
+                    <p>Sou um profissional dedicado à criação de experiências digitais excepcionais. Minha abordagem combina design minimalista com funcionalidade intuitiva.</p>
+                    <p style="opacity: 0.7; font-size: 0.95rem;">Desenvolvo soluções que unem forma e função, criando interfaces que não apenas impressionam visualmente, mas também oferecem desempenho.</p>
                 </div>
                 <div class="skills">
                     <div class="skill-bar">
@@ -291,6 +374,7 @@
                         <button class="close-preview">Diminuir card</button>
                     </div>
                 </div>
+
                 <div class="project-card" data-project="2">
                     <h3>GELOTECA</h3>
                     <p>Website para auxiliar a ONG geloteca a expandir as visualizações.</p>
@@ -302,6 +386,7 @@
                         <button class="close-preview">Diminuir card</button>
                     </div>
                 </div>
+
                 <div class="project-card" data-project="3">
                     <h3>BOLINHAS</h3>
                     <p>Criado para divertir e testar aplicação real da gravidade dentro de códigos.</p>
@@ -319,12 +404,12 @@
     
     <section id="contato" class="parallax-section">
         <div class="content">
-            <h2>ENTRE EM CONTATO</h2>
+            <h2>CONTATO</h2>
             <form id="contact-form">
                 <input type="text" placeholder="Nome" required>
                 <input type="email" placeholder="Email" required>
                 <textarea placeholder="Mensagem" rows="5" required></textarea>
-                <button type="submit" id="submit-btn">Enviar Mensagem</button>
+                <button type="submit" id="btn-submit">Enviar Mensagem</button>
             </form>
             <div class="social-links">
                 <a href="#"><i class="fab fa-github"></i></a>
@@ -335,7 +420,7 @@
     </section>
     
     <footer>
-        <p>&copy; 2026 Pablo Soares. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Pablo Soares. Criado com dedicação.</p>
     </footer>
     
     <script>
@@ -344,31 +429,31 @@
             const circlesTop = document.getElementById('circles-top');
             const circlesBottom = document.getElementById('circles-bottom');
             const projectUrls = {
-                1: 'https://pablinxd24.github.io/NEURON-MOB/',
+                1: 'https://pablinxd24.github.io/NEURON3/',
                 2: 'https://pablinxd24.github.io/GELOTECA/',
                 3: 'https://pablinxd24.github.io/bolita2/'
             };
 
-            // 1. Cursor e Interação de Fundo
+            // 1. Cursor Personalizado
             document.addEventListener('mousemove', (e) => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
                 
-                // Movimento sutil dos círculos de fundo
+                // 2. Interação dos Círculos de fundo com o Mouse (Efeito Sutil)
                 const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
                 const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
                 circlesTop.style.transform = `translate(${moveX}px, ${moveY}px)`;
                 circlesBottom.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
             });
 
-            // Efeito de hover do cursor
+            // Feedback de hover para o cursor
             const interactiveElements = document.querySelectorAll('a, button, .project-card, input, textarea');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
             });
 
-            // 2. Parallax e Scroll
+            // 3. Scroll e Parallax Inverso para Dots
             window.addEventListener('scroll', function() {
                 let scroll = window.pageYOffset;
                 const nav = document.querySelector('nav');
@@ -376,14 +461,16 @@
                 if (scroll > 50) nav.classList.add('scrolled');
                 else nav.classList.remove('scrolled');
                 
-                // Parallax reverso nas bolinhas
-                document.querySelectorAll('.dot').forEach(dot => {
-                    const speed = dot.clientHeight * 0.15;
-                    dot.style.transform = `translateY(${scroll * -0.1}px)`;
+                // Parallax invertido nas bolinhas
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    const speed = (index + 1) * 0.1;
+                    dot.style.transform = `translateY(${scroll * -speed}px)`; // Sinal negativo para inverter
                 });
 
-                // Animação de skills quando visível
-                document.querySelectorAll('.skill-progress span').forEach(bar => {
+                // Skill Bars
+                const skillBars = document.querySelectorAll('.skill-progress span');
+                skillBars.forEach(bar => {
                     const rect = bar.getBoundingClientRect();
                     if(rect.top < window.innerHeight) {
                         bar.style.width = bar.getAttribute('data-width');
@@ -391,52 +478,63 @@
                 });
             });
 
-            // 3. Lógica de Expansão de Cards (Original mantida e refinada)
+            // 4. Lógica de Expansão de Projetos (Melhorada)
             const projectCards = document.querySelectorAll('.project-card');
-            let expandedCard = null;
-
             projectCards.forEach(card => {
                 card.addEventListener('click', function(e) {
-                    if (e.target.closest('.project-actions')) return;
+                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('.project-actions')) return;
                     
-                    if (expandedCard && expandedCard !== this) {
-                        expandedCard.classList.remove('expanded');
-                        expandedCard.querySelector('iframe').src = 'about:blank';
-                    }
+                    const isExpanded = this.classList.contains('expanded');
                     
+                    // Fecha outros cards
+                    projectCards.forEach(c => {
+                        if(c !== this) {
+                            c.classList.remove('expanded');
+                            c.querySelector('iframe').src = 'about:blank';
+                        }
+                    });
+
                     this.classList.toggle('expanded');
+                    const iframe = this.querySelector('iframe');
                     
-                    if (this.classList.contains('expanded')) {
-                        expandedCard = this;
-                        const projectId = this.getAttribute('data-project');
-                        this.querySelector('iframe').src = projectUrls[projectId];
+                    if (!isExpanded) {
+                        const id = this.getAttribute('data-project');
+                        iframe.src = projectUrls[id];
                     } else {
-                        expandedCard = null;
-                        this.querySelector('iframe').src = 'about:blank';
+                        iframe.src = 'about:blank';
                     }
                 });
             });
 
-            // 4. Feedback de Formulário
+            // 5. Feedback de Formulário
             const form = document.getElementById('contact-form');
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const btn = document.getElementById('submit-btn');
-                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Enviando...';
+                const btn = document.getElementById('btn-submit');
+                const originalText = btn.innerText;
+                
+                btn.innerText = 'Enviando...';
+                btn.classList.add('loading');
+                
                 setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-check"></i> Enviado!';
+                    btn.innerText = 'Mensagem Enviada!';
+                    btn.style.background = 'rgba(0, 255, 0, 0.2)';
                     form.reset();
-                }, 2000);
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.background = '';
+                        btn.classList.remove('loading');
+                    }, 3000);
+                }, 1500);
             });
             
-            // Botão fechar
-            document.querySelectorAll('.close-preview').forEach(button => {
-                button.addEventListener('click', function(e) {
+            // Botões de fechar
+            document.querySelectorAll('.close-preview').forEach(btn => {
+                btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const card = this.closest('.project-card');
+                    const card = btn.closest('.project-card');
                     card.classList.remove('expanded');
                     card.querySelector('iframe').src = 'about:blank';
-                    expandedCard = null;
                 });
             });
         });
