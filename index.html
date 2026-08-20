@@ -355,7 +355,7 @@
         .project-card p {
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.95rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .project-card:hover {
@@ -365,95 +365,141 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        /* Indicador de Interatividade no Card */
-        .project-card::after {
-            content: '\f067';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            opacity: 0.3;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .project-card:hover::after { opacity: 0.8; color: #fff; }
-        .project-card.expanded::after { content: '\f068'; }
-
-        .project-preview {
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 16px;
-            background: #0a0a0a;
-            position: relative;
-        }
-
-        .project-card.expanded .project-preview::before {
-            content: 'Carregando experiência...';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.4);
-            z-index: 1;
-        }
-
-        .project-card.expanded .project-preview {
-            height: 450px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 15px;
+        .open-modal-btn {
+            display: inline-flex;
             align-items: center;
-            margin-top: 15px;
-            opacity: 0;
-            transform: translateY(10px);
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            pointer-events: none;
+            text-decoration: none;
         }
 
-        .project-card.expanded .project-actions {
+        .open-modal-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            transform: scale(1.03);
+        }
+
+        /* --- MODAL DE PREVIEW IMERSIVO --- */
+        .project-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 9998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-modal-overlay.active {
             opacity: 1;
-            transform: translateY(0);
             pointer-events: auto;
         }
 
-        .project-link {
-            padding: 10px 20px;
-            background: #fff;
-            color: #000;
-            text-decoration: none;
-            border-radius: 8px;
+        .project-modal-container {
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: rgba(15, 15, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-modal-overlay.active .project-modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .project-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .project-modal-title {
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
+            letter-spacing: 1px;
+            color: #fff;
         }
 
-        .project-link:hover {
-            background: rgba(255,255,255,0.8);
-            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        .project-modal-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        .close-preview {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
+        .modal-external-link {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
             border-radius: 8px;
-            font-weight: 500;
             font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-external-link:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .close-modal-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
             cursor: none;
             transition: 0.3s;
         }
 
-        .close-preview:hover {
-            background: rgba(255,255,255,0.15);
+        .close-modal-btn:hover {
+            background: #ff4d4d;
+            border-color: #ff4d4d;
+            transform: rotate(90deg);
+        }
+
+        .project-modal-body {
+            flex: 1;
+            width: 100%;
+            background: #08080c;
+            position: relative;
+        }
+
+        .project-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Contato Refinado */
@@ -557,6 +603,7 @@
             #custom-cursor { display: none; }
             * { cursor: auto; }
             nav { width: 95%; padding: 10px 15px; }
+            .project-modal-container { width: 95%; height: 90vh; }
         }
     </style>
 </head>
@@ -628,49 +675,53 @@
                 <div class="project-card" data-project="1">
                     <h3>NEURON</h3>
                     <p>App desenvolvido para competir na FECEG / FEBRACE.</p>
-                    <div class="project-preview">
-                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%; position: relative; z-index: 2;"></iframe>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://pablinxd24.github.io/NEURON3/" class="project-link" target="_blank">Conhecer de pertinho</a>
-                        <button class="close-preview">Diminuir card</button>
-                    </div>
+                    <button class="open-modal-btn" data-id="1" data-title="NEURON">
+                        <i class="fas fa-eye"></i> Visualizar Projeto
+                    </button>
                 </div>
 
                 <div class="project-card" data-project="2">
                     <h3>GELOTECA</h3>
                     <p>Website para auxiliar a ONG geloteca a expandir as visualizações.</p>
-                    <div class="project-preview">
-                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%; position: relative; z-index: 2;"></iframe>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://pablinxd24.github.io/GELOTECA/" class="project-link" target="_blank">Conhecer de pertinho</a>
-                        <button class="close-preview">Diminuir card</button>
-                    </div>
+                    <button class="open-modal-btn" data-id="2" data-title="GELOTECA">
+                        <i class="fas fa-eye"></i> Visualizar Projeto
+                    </button>
                 </div>
 
                 <div class="project-card" data-project="3">
                     <h3>BOLINHAS</h3>
                     <p>Criado para divertir e testar aplicação real da gravidade dentro de códigos.</p>
-                    <div class="project-preview">
-                        <iframe src="about:blank" frameborder="0" style="width: 100%; height: 100%; position: relative; z-index: 2;"></iframe>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://pablinxd24.github.io/bolita2/" class="project-link" target="_blank">Conhecer de pertinho</a>
-                        <button class="close-preview">Diminuir card</button>
-                    </div>
+                    <button class="open-modal-btn" data-id="3" data-title="BOLINHAS">
+                        <i class="fas fa-eye"></i> Visualizar Projeto
+                    </button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal de Preview Imersivo para os Projetos -->
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal-container">
+            <div class="project-modal-header">
+                <span class="project-modal-title" id="modalTitle">Nome do Projeto</span>
+                <div class="project-modal-actions">
+                    <a href="#" class="modal-external-link" id="modalExternalLink" target="_blank">Abrir em Nova Aba <i class="fas fa-external-link-alt"></i></a>
+                    <button class="close-modal-btn" id="closeModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="project-modal-body">
+                <iframe id="modalIframe" src="about:blank" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
     
     <section id="contato" class="parallax-section">
         <div class="content">
             <h2>CONTATO</h2>
             <form id="contact-form">
-                <input type="text" placeholder="Nome" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Mensagem" rows="5" required></textarea>
+                <input type="text" id="nome" placeholder="Nome" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <textarea id="mensagem" placeholder="Mensagem" rows="5" required></textarea>
                 <button type="submit" id="btn-submit">Enviar Mensagem</button>
             </form>
             <div class="social-links">
@@ -690,6 +741,7 @@
             const cursor = document.getElementById('custom-cursor');
             const circlesTop = document.getElementById('circles-top');
             const circlesBottom = document.getElementById('circles-bottom');
+            
             const projectUrls = {
                 1: 'https://pablinxd24.github.io/NEURON3/',
                 2: 'https://pablinxd24.github.io/GELOTECA/',
@@ -740,48 +792,76 @@
                 });
             });
 
-            // 4. Lógica de Expansão de Projetos (Melhorada)
-            const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('.project-actions')) return;
-                    
-                    const isExpanded = this.classList.contains('expanded');
-                    
-                    // Fecha outros cards
-                    projectCards.forEach(c => {
-                        if(c !== this) {
-                            c.classList.remove('expanded');
-                            c.querySelector('iframe').src = 'about:blank';
-                        }
-                    });
+            // 4. Lógica do Modal Imersivo de Projetos
+            const modal = document.getElementById('projectModal');
+            const modalIframe = document.getElementById('modalIframe');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalExternalLink = document.getElementById('modalExternalLink');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const openModalBtns = document.querySelectorAll('.open-modal-btn');
 
-                    this.classList.toggle('expanded');
-                    const iframe = this.querySelector('iframe');
-                    
-                    if (!isExpanded) {
-                        const id = this.getAttribute('data-project');
-                        iframe.src = projectUrls[id];
-                    } else {
-                        iframe.src = 'about:blank';
-                    }
+            openModalBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const title = this.getAttribute('data-title');
+                    const url = projectUrls[id];
+
+                    modalTitle.innerText = title;
+                    modalExternalLink.href = url;
+                    modalIframe.src = url;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
             });
 
-            // 5. Feedback de Formulário
+            function closeModal() {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modalIframe.src = 'about:blank';
+                }, 300);
+                document.body.style.overflow = 'auto';
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // 5. Envio de Formulário via WhatsApp
             const form = document.getElementById('contact-form');
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
+                
+                const nome = document.getElementById('nome').value;
+                const email = document.getElementById('email').value;
+                const mensagem = document.getElementById('mensagem').value;
                 const btn = document.getElementById('btn-submit');
                 const originalText = btn.innerText;
                 
-                btn.innerText = 'Enviando...';
+                btn.innerText = 'Redirecionando...';
                 btn.classList.add('loading');
                 
+                // Número do WhatsApp configurado: 5511933560170
+                const phone = '5511933560170';
+                const text = `*Nova Mensagem do Portfólio*%0A%0A*Nome:* ${encodeURIComponent(nome)}%0A*Email:* ${encodeURIComponent(email)}%0A*Mensagem:* ${encodeURIComponent(mensagem)}`;
+                
                 setTimeout(() => {
-                    btn.innerText = 'Mensagem Enviada!';
-                    btn.style.background = '#4caf50';
+                    btn.innerText = 'Redirecionado!';
+                    btn.style.background = '#25D366';
                     btn.style.color = '#fff';
+                    
+                    // Abre o WhatsApp
+                    window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${text}`, '_blank');
+                    
                     form.reset();
                     setTimeout(() => {
                         btn.innerText = originalText;
@@ -789,17 +869,7 @@
                         btn.style.color = '';
                         btn.classList.remove('loading');
                     }, 3000);
-                }, 1500);
-            });
-            
-            // Botões de fechar
-            document.querySelectorAll('.close-preview').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const card = btn.closest('.project-card');
-                    card.classList.remove('expanded');
-                    card.querySelector('iframe').src = 'about:blank';
-                });
+                }, 1000);
             });
         });
     </script>
